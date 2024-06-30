@@ -11,7 +11,6 @@ y2 = (2, 4, 3, 6, 8, 7, 4, 6, 6)
 x3 = np.arange(0, 9, 0.1)
 y3 = np.cos(x3)
 
-
 #plot function has many customisations:
 
 #MARKER allows to add markers at every change point in the plot
@@ -21,9 +20,6 @@ y3 = np.cos(x3)
 #to customise the LINE, we can use:
 #linewidth
 #linestyle
-
-fig, ax = plt.subplots(figsize=(12, 6))
-
 
 plt.plot(x1, y1, label="x=y", color="blue", marker="3", markerfacecolor="black", linewidth=1, linestyle="-.")
 plt.plot(x3, abs(7 * y3), label="cosine", color="tomato", linestyle=":", linewidth="2")
