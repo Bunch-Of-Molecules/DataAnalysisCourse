@@ -1,12 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import scipy.stats
 import pandas as pd
 
-wholesale_data = pd.read_csv("Raw Data Sets/Wholesale_customers.csv")
+wholesale_data = pd.read_csv("../Raw Data Sets/Wholesale_customers.csv")
 
 """
-Correlation and covariance are measures of linear relationship between the given datasets
+Correlation and covariance are measures of linear+ relationship between the given datasets
 Correlation is just a normalised version of covariance.
 -1<cor<1   and  -infi<cov<+infi
 """
@@ -41,13 +40,23 @@ y_nocor = variation
 def three_row_scatter(x1, y1, x2, y2, x3, y3, title1="Graph 1", title2="Graph 2", title3="Graph 3"):
     fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(10, 12))  # read documentation for more use case examples
 
-    ax1.scatter(x1, y1, marker="o", color="red")
+    line1 = np.poly1d(np.polyfit(x1, y1, 1))
+    line2 = np.poly1d(np.polyfit(x2, y2, 1))
+    line3 = np.poly1d(np.polyfit(x3, y3, 1))
+
+    ax1.scatter(x1, y1, marker="o", s=10)
+    ax1.plot(x1, line1(x1), '-', label="Positive Relation", color="red")
     ax1.set_title(title1)
-    ax2.scatter(x2, y2, marker="o", color="blue")
+
+    ax2.scatter(x2, y2, marker="o", s=10)
+    ax2.plot(x1, line2(x1), '-', label="Negative Relation", color="red")
     ax2.set_title(title2)
-    ax3.scatter(x3, y3, marker="o", color="black")
+
+    ax3.scatter(x3, y3, marker="o", s=10)
+    ax3.plot(x1, line3(x1), '-', label="No Relation", color="red")
     ax3.set_title(title3)
 
+    plt.legend()
     plt.show()
 
 
@@ -56,10 +65,14 @@ cor1 = np.corrcoef(x, y_poscor)
 cor2 = np.corrcoef(x, y_negcor)
 cor3 = np.corrcoef(x, y_nocor)
 
-print(str(cor1[0][1]) + "\n" + str(cor2[0][1]) + "\n" + str(cor3[0][1]))
+print(str(cor1[0][1]) + "\n" + str(cor2[0][1]) + "\n" + str(cor3[0][1]) + "\n")
 
 """
 We see a strong correlation between x and y_poscor and y_negcor, with are positive and negative respectively.
 A very small value of correlation coefficient of x and y_nocor shows that there's no meaningful relation between x
 and y_nocor
 """
+
+print()
+print(wholesale_data.corr())
+#pairwise correlation calculator, generators a correlation matrix

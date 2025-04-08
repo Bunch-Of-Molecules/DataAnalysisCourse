@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats
 
-wholesale_data = pd.read_csv("Raw Data Sets/Wholesale_customers.csv")
+wholesale_data = pd.read_csv("../Raw Data Sets/Wholesale_customers.csv")
 
 column_heads = list(wholesale_data)
 
@@ -33,7 +33,7 @@ maxSaleCategory = max(sum_dict, key=sum_dict.get)
 def two_row_plotter(x1, y1, x2, y2, title1="Graph 1", title2="Graph 2"):
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 7))  # read documentation for more use case examples
 
-    ax1.bar(x1, y1, align="center", width=0.5)
+    ax1.bar(x1, y1, align="center", width=0.5, color="green")
     ax1.set_title(title1)
     ax2.bar(x2, y2, align="center", width=0.5)
     ax2.set_title(title2)
@@ -41,7 +41,7 @@ def two_row_plotter(x1, y1, x2, y2, title1="Graph 1", title2="Graph 2"):
     plt.show()
 
 
-#two_row_plotter(x1=list(max_dict.keys()), y1=list(max_dict.values()), x2=list(sum_dict.keys()), y2=list(sum_dict.values()))
+#two_row_plotter(x1=list(max_dict.keys()), y1=list(max_dict.values()), x2=list(sum_dict.keys()), y2=list(sum_dict.values()), title1="Maximum Sales Per Category", title2="Total Sales per category")
 
 
 #plots mean, median, max, min and iqr as lines with data points
@@ -53,7 +53,7 @@ def summary_stats_1(data, col):
     year_iqr = np.percentile(data[col], [75])[0] - np.percentile(data[col], [25])[0]
 
     fix, ax = plt.subplots(figsize=(15, 6))
-    plt.scatter(data.index, data[col], marker="^")
+    plt.scatter(data.index, data[col], marker="o")
 
     ax.axhline(y=year_avg, label="Mean", color="deeppink", linestyle="--", linewidth=2)
     ax.axhline(y=year_med, label="Median", color="black", linewidth=2)
@@ -63,6 +63,9 @@ def summary_stats_1(data, col):
 
     ax.legend()
     plt.show()
+
+
+summary_stats_1(wholesale_data, "Grocery")
 
 
 #plots mean, std, and sigma+-1 lines with the given distribution
@@ -106,3 +109,5 @@ def normal_or_no(data, col):
     percentage = (c / ar_len) * 100
     return percentage
 
+
+#print(normal_or_no(wholesale_data, "Fresh"))

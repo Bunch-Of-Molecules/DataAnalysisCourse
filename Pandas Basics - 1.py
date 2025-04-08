@@ -1,6 +1,5 @@
 import pandas as pd
 
-
 def printer(variables):
     for var in variables:
         print(var)

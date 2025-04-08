@@ -1,5 +1,4 @@
 import pandas as pd
-import random
 
 dic = {1: ["Person1", "Person2", "Person3", "Person4", "Person5"],
        2: [23, 45, 23, 65, 24],
@@ -40,7 +39,6 @@ def Reading_a_csv(path):
     print(data_1)
     print(var)
 
-
 #use drop() to remove stuff
 #------Dealing with missing data----#
 
@@ -61,4 +59,4 @@ def Grouping_Random_data(path):
     return grouped_data
 
 
-Reading_a_csv("Raw Data Sets/prices.csv")
+Reading_a_csv("../Raw Data Sets/prices.csv")

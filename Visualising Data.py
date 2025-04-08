@@ -33,5 +33,3 @@ def sorter(dataset, column):
 def month_maker(dataset, col):
     for i in range(0, 254, 1):
         dataset.loc[i, col] = month_list[dataset[col][i][5:7]]
-
-
